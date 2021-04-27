@@ -1,1 +1,39 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+body {
+  background-color: green;
+  margin: 1rem;
+}
+section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  width: 9rem;
+  padding: 0.1rem;
+  border-radius: 0.5rem;
+  font-size: 3rem;
+}
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.firstSuit {
+  padding-left: 0.5rem;
+}
+.secondSuit {
+  padding-left: 6rem;
+}
+.valueContainer {
+  text-align: center;
+  font-size: 5rem;
+}
