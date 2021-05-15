@@ -1,6 +1,6 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 body {
-  background-color: green;
+  background-color: rgb(173, 180, 173);
   margin: 1rem;
 }
 section {
@@ -36,4 +36,7 @@ section {
 .valueContainer {
   text-align: center;
   font-size: 5rem;
+}
+#drawnCardsContainer {
+  display: flex;
 }
