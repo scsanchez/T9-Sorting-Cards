@@ -11,21 +11,6 @@ const DRAWORDEREDCARDSCONTAINER = document.querySelector(
   "#drawnOrderedCardscontainer"
 );
 const VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-// const VALUES = [
-//   "A",
-//   "2",
-//   "3",
-//   "4",
-//   "5",
-//   "6",
-//   "7",
-//   "8",
-//   "9",
-//   "10",
-//   "J",
-//   "Q",
-//   "K"
-// ];
 const SUITS = ["♠", "♣", "♥", "♦"];
 const SECTION_TO_DRAW = document.querySelector("#drawnCardsContainer");
 
@@ -38,11 +23,13 @@ window.onload = function() {
 const getCards = () => {
   BUTTON.addEventListener("click", event => {
     event.preventDefault();
+    cardList = [];
     DRAWNCARDSCONTAINER.innerHTML = "";
     DRAWORDEREDCARDSCONTAINER.innerHTML = "";
     for (let index = 0; index < INPUT.value; index++) {
       drawCard(generateCards());
     }
+    console.log(cardList);
   });
 };
 
@@ -51,6 +38,7 @@ const generateCards = () => {
     value: VALUES[getRandom(VALUES.length)],
     suit: SUITS[getRandom(SUITS.length)]
   };
+  cardList.push(card);
   return card;
 };
 
