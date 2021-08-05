@@ -3,9 +3,9 @@ body {
   background-color: rgb(173, 180, 173);
   margin: 1rem;
 }
-section {
-  display: flex;
-  flex-wrap: wrap;
+
+.container {
+  margin: 0;
 }
 
 .card {
@@ -39,4 +39,7 @@ section {
 }
 #drawnCardsContainer {
   display: flex;
+}
+#drawnOrderedCardscontainer {
+  margin-top: 5 rem;
 }

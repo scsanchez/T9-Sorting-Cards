@@ -18,6 +18,8 @@ let cardList = [];
 
 window.onload = function() {
   getCards();
+  sortCardsBubble();
+  sortCardsSelection();
 };
 
 const getCards = () => {
@@ -26,10 +28,12 @@ const getCards = () => {
     cardList = [];
     DRAWNCARDSCONTAINER.innerHTML = "";
     DRAWORDEREDCARDSCONTAINER.innerHTML = "";
+    let row = document.createElement("div");
     for (let index = 0; index < INPUT.value; index++) {
-      drawCard(generateCards());
+      let cardTemp = generateCards();
+      cardList.push(cardTemp);
+      drawCard(cardTemp, DRAWNCARDSCONTAINER, row);
     }
-    console.log(cardList);
   });
 };
 
@@ -38,7 +42,6 @@ const generateCards = () => {
     value: VALUES[getRandom(VALUES.length)],
     suit: SUITS[getRandom(SUITS.length)]
   };
-  cardList.push(card);
   return card;
 };
 
@@ -46,7 +49,7 @@ const getRandom = maxNumber => {
   return Math.floor(Math.random() * maxNumber);
 };
 
-const drawCard = card => {
+const drawCard = (card, place, row) => {
   let cardBody = document.createElement("div");
   cardBody.classList.add("card");
 
@@ -79,9 +82,9 @@ const drawCard = card => {
 
   SECTION_TO_DRAW.appendChild(cardBody);
 
-  //     row.classList.add("row");
-  //   row.appendChild(card);
-  //   place.appendChild(row);
+  row.classList.add("row");
+  row.appendChild(cardBody);
+  place.appendChild(row);
 };
 
 function drawRowOfCards(myArray, counter) {
@@ -94,19 +97,31 @@ function drawRowOfCards(myArray, counter) {
 }
 function sortCardsBubble() {
   BUBBLEBUTTON.addEventListener("click", event => {
+    event.preventDefault();
     DRAWORDEREDCARDSCONTAINER.innerHTML = "";
     DRAWORDEREDCARDSCONTAINER.innerHTML =
       "<p>Cartas ordenadas con Bubble Sort: (Para volver a utilizar un algoritmo de ordenación, generar nuevas cartas)</p>";
     bubbleSortAlgorithm(cardList);
   });
 }
+
+function sortCardsSelection() {
+  SELECTIONBUTTON.addEventListener("click", event => {
+    event.preventDefault();
+    DRAWORDEREDCARDSCONTAINER.innerHTML = "";
+    DRAWORDEREDCARDSCONTAINER.innerHTML =
+      "<p>Cartas ordenadas con Selection Sort: (Para volver a utilizar un algoritmo de ordenación, generar nuevas cartas)</p>";
+    selectSort(cardList);
+  });
+}
+
 function bubbleSortAlgorithm(arr) {
   let wall = arr.length - 1;
   let counter = 0;
   while (wall > 0) {
     let index = 0;
     while (index < wall) {
-      if (arr[index].number > arr[index + 1].number) {
+      if (arr[index].value > arr[index + 1].value) {
         let aux = arr[index];
         arr[index] = arr[index + 1];
         arr[index + 1] = aux;
@@ -118,4 +133,23 @@ function bubbleSortAlgorithm(arr) {
     }
     wall--;
   }
+  return arr;
+}
+
+function selectSort(arr) {
+  let min = 0;
+  let counter = 0;
+  while (min < arr.length) {
+    for (let i = min + 1; i < arr.length; i++) {
+      if (arr[min].value > arr[i].value) {
+        let aux = arr[min];
+        arr[min] = arr[i];
+        arr[i] = aux;
+        drawRowOfCards(cardList, counter);
+        counter++;
+      }
+    }
+    min++;
+  }
+  return arr;
 }
